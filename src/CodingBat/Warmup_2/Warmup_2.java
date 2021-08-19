@@ -1,8 +1,42 @@
 package CodingBat.Warmup_2;
 
+import java.util.Scanner;
+
 public class Warmup_2 {
     public static void main(String[] args) {
 
+        Scanner scanner = new Scanner(System.in);
+        int a = scanner.nextInt();
+
+        Scanner in = new Scanner(System.in);
+        int[] nums = new int[2];
+        nums[0] = in.nextInt();
+        nums[1] = in.nextInt();
+        String[] strarr = new String [nums[1] - nums[0] + 1];
+        int[] intarr = new int [nums[1] - nums[0] + 1];
+        intarr[0] = nums[0];
+
+        for (int i = 1; i <= nums[1] - nums[0]; i++) {
+            intarr[i] = intarr[i - 1] + 1;
+        }
+
+        for (int i = 0; i <= nums[1] - nums[0]; i++) {
+            if (intarr[i] % 3 == 0) {
+                strarr[i] = "Fizz";
+                if (intarr[i] % 5 == 0) {
+                    strarr[i] = "FizzBuzz";
+                }
+            }
+            else
+                if (intarr[i] % 5 == 0) {
+                    strarr[i] = "Buzz";
+                }
+                else strarr[i] = String.valueOf(intarr[i]);
+        }
+
+        for (String curr: strarr) {
+            System.out.println(curr);
+        }
     }
 
     public String stringTimes(String str, int n) {
@@ -77,6 +111,5 @@ public class Warmup_2 {
             return i;
         }
     }
-
 
 }
