@@ -3,24 +3,16 @@ package YandexContest.Spring2022;
 import java.util.Scanner;
 
 public class A {
-    public enum Stat {
-        absent,
-        correct,
-        present
-    }
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         StringBuilder S = new StringBuilder(scanner.nextLine());
         StringBuilder D = new StringBuilder(scanner.nextLine());
-        Stat[] stats = new Stat[S.length()];
-        for (int i = 0; i < S.length(); i++) {
-            stats[i] = Stat.absent;
-        }
+        int n = S.length();
+        int[] stats = new int[S.length()];
         int i = 0;
-        for (int j = 0; j <= S.length(); j++) {
+        for (int j = 0; j < n; j++) {
             if (S.charAt(i) == D.charAt(i)) {
-                stats[j] = Stat.correct;
+                stats[j] = 1;
                 S.deleteCharAt(i);
                 D.deleteCharAt(i);
             }
@@ -30,20 +22,28 @@ public class A {
         }
         i = 0;
         for (int j = 0; j < stats.length; j++) {
-            if (stats[j] == Stat.absent) {
+            if (stats[j] == 0) {
                 int ind = S.indexOf(String.valueOf(D.charAt(i)));
                 if (ind > -1) {
                     S.deleteCharAt(ind);
                     D.deleteCharAt(i);
-                    stats[j] = Stat.present;
+                    stats[j] = 2;
                 }
                 else {
                     i++;
                 }
             }
         }
-        for (Stat stat: stats) {
-            System.out.println(stat);
+        for (int j = 0; j < stats.length; j++) {
+            if (stats[j] == 0) {
+                System.out.println("absent");
+            }
+            else if (stats[j] == 1) {
+                System.out.println("correct");
+            }
+            else {
+                System.out.println("present");
+            }
         }
     }
 }
